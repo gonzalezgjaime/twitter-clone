@@ -1,0 +1,25 @@
+<div id="<%= dom_id tweet %>" class="border border-t max-w-sm">
+  <div class="my-2">
+    <span><%= tweet.user.email %></span>
+  </div>
+  <p class="my-2">
+<!--    <strong class="block font-medium mb-1">Body:</strong>-->
+    <%= tweet.body %>
+  </p>
+
+  <div class="flex space-x-2 items-center my-3">
+    <div class="flex space-x-2">
+      <%= link_to like_icon, like_tweet_path(tweet), method: :patch, data: { turbo_method: :patch }, class:"inline-block text-blue-500" %>
+      <span><%= tweet.likes_count == nil ? "0" : tweet.likes_count %></span>
+    </div>
+
+    <div class="flex space-x-2">
+      <%= link_to retweet_icon, retweet_tweet_path(tweet), method: :post, data: { turbo_method: :post }, class: "inline-block" %>
+      <span><%= tweet.retweets_count == nil ? "0" : tweet.retweets_count %></span>
+    </div>
+
+    <div>
+      <%= link_to trash_icon, tweet_path(tweet), method: :delete, data: { turbo_method: :delete }, class: "inline-block text-red-500" %>
+    </div>
+  </div>
+</div>

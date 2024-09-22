@@ -1,0 +1,13 @@
+<aside class="">
+  <nav aria-label="Main Navigation">
+
+    <div data-controller="tweet-modal">
+      <ul>
+        <li>Home</li>
+        <li>Profile</li>
+        <li><button type="button" data-action="click->tweet-modal#open">Post</button></li>
+        <li><%= button_to "Logout", destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </div>
+  </nav>
+</aside>

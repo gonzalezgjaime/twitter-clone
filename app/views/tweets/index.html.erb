@@ -1,0 +1,38 @@
+<div class="" data-controller="tweet-modal">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Tweets" %>
+
+  <h1 class="font-bold text-4xl">Tweets</h1>
+
+  <!--   Button to open the modal-->
+  <button type="button" data-turbo="false" data-action="click->tweet-modal#open">Post</button>
+
+  <div class="flex hidden justify-center py-4 z-10" data-tweet-modal-target="modal">
+      <div class="flex modal-overlay shadow-xl rounded-lg border border-2 w-1/2 md:max-w-1/2 justify-center py-5">
+        <div id="modal-content" class="w-full px-3">
+          <header id="modal-header">
+            <button type="button" data-turbo="false" data-action="click->tweet-modal#close"><%= close_icon %></button>
+          </header>
+          <main>
+            <%= turbo_frame_tag "new_tweet" do %>
+              <%= render "tweets/form", tweet: @tweet %>
+            <% end %>
+          </main>
+      </div>
+    </div>
+  </div>
+
+  <div id="tweets" class="mt-8 min-w-full">
+    <%= turbo_frame_tag "tweets" do %>
+      <% @tweets.each do |tweet| %>
+        <%= render tweet %>
+        <% tweet.retweets.each do |retweet| %>
+          <%= render partial: "tweets/tweet", locals: { tweet: retweet.tweet} %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

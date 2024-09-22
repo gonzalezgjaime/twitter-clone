@@ -1,0 +1,31 @@
+<%= form_with(model: tweet, class: "contents", local: false, data: { turbo_frame: "new_tweet" }) do |form| %>
+  <% if tweet.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3 max-w-sm">
+      <h2><%= pluralize(tweet.errors.count, "error") %></h2>
+
+      <ul>
+        <% tweet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.text_area :body, rows: 4, placeholder: "Whats happening", class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <!--  <div class="my-5">-->
+  <%#= form.label :likes_count %>
+  <%#= form.number_field :likes_count, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  <!--  </div>-->
+
+  <!--  <div class="my-5">-->
+  <%#= form.label :retweets_count %>
+  <%#= form.number_field :retweets_count, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  <!--  </div>-->
+
+  <div class="inline flex justify-end">
+    <%= form.submit "Post", class: "rounded-lg py-2 px-3 bg-blue-600 text-white inline-block font-small cursor-pointer" %>
+  </div>
+<% end %>
